@@ -14,7 +14,18 @@ public class LoginSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        RegistrationSystem registrationSystem = new RegistrationSystem();
+
+        
+        LoginFrame loginFrame = new LoginFrame(registrationSystem);
+        
+        //registrationSystem.clearFile();
+        RegisterFrame registerFrame = new RegisterFrame(registrationSystem);
+        HubFrame hubFrame = new HubFrame(registrationSystem);
+        
+
+  
+        hubFrame.setVisible(true); // Show the hub frame
     }
     
 }
