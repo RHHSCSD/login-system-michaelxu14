@@ -7,6 +7,17 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/*
+
+test
+test
+ABCDefgh!
+
+
+*/
+
+
 /**
  * This class handles the registration system for the login system.
  * It provides methods for registering users, encrypting passwords,

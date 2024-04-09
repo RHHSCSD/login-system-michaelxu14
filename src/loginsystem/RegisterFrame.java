@@ -136,21 +136,23 @@ public class RegisterFrame extends javax.swing.JFrame {
          // Create an instance of the RegistrationSystem class
         RegistrationSystem registrationSystem = new RegistrationSystem();
         
-        if (registrationSystem.strongPassword(password)){
+        if (registrationSystem.strongPassword(password) && registrationSystem.isUniqueName(username)) {
             authToken = registrationSystem.generateAuthToken();
             id = registrationSystem.generateId();
             System.out.println(authToken);
             System.out.println(id);
             User newUser = new User(username, email, password, authToken, id); // authToken and id are set to null for now
             registrationSystem.register(newUser);
-           
-            
+
             this.dispose();
             HubFrame hubFrame = new HubFrame(registrationSystem);
             hubFrame.setVisible(true);
-        } else {
+        } else if (!registrationSystem.strongPassword(password)) {
             // Password doesn't meet the strength requirements
             System.out.println("Password does not meet the strength requirements.");
+        } else if (!registrationSystem.isUniqueName(username)) {
+            // Name is not unique
+            System.out.println("Username is not unique");
         }
         
         

@@ -19,7 +19,9 @@ public class LoginSystem {
         
         LoginFrame loginFrame = new LoginFrame(registrationSystem);
         
-        //registrationSystem.clearFile();
+        
+        //Comment when not testing
+        registrationSystem.clearFile();
         RegisterFrame registerFrame = new RegisterFrame(registrationSystem);
         HubFrame hubFrame = new HubFrame(registrationSystem);
         
