@@ -4,6 +4,10 @@
  */
 package loginsystem;
 
+import java.awt.FlowLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Xu Last Name
@@ -118,44 +122,58 @@ public class RegisterFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-     
-
-    
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Register button clicked
-        String username = jTextField2.getText();
-        String email = jTextField1.getText();
-        String authToken = "";
-        String id = "";
-        String password = new String(jPasswordField1.getPassword());
-        
-         // Create an instance of the RegistrationSystem class
-        RegistrationSystem registrationSystem = new RegistrationSystem();
-        
-        if (registrationSystem.strongPassword(password) && registrationSystem.isUniqueName(username)) {
-            authToken = registrationSystem.generateAuthToken();
-            id = registrationSystem.generateId();
-            System.out.println(authToken);
-            System.out.println(id);
-            User newUser = new User(username, email, password, authToken, id); // authToken and id are set to null for now
-            registrationSystem.register(newUser);
+         // Register button clicked
+            String username = jTextField2.getText();
+            String email = jTextField1.getText();
+            String authToken = "";
+            String id = "";
+            String password = new String(jPasswordField1.getPassword());
 
-            this.dispose();
-            HubFrame hubFrame = new HubFrame(registrationSystem);
-            hubFrame.setVisible(true);
-        } else if (!registrationSystem.strongPassword(password)) {
-            // Password doesn't meet the strength requirements
-            System.out.println("Password does not meet the strength requirements.");
-        } else if (!registrationSystem.isUniqueName(username)) {
-            // Name is not unique
-            System.out.println("Username is not unique");
-        }
-        
-        
+             // Create an instance of the RegistrationSystem class
+            RegistrationSystem registrationSystem = new RegistrationSystem();
+
+            if (registrationSystem.strongPassword(password) && registrationSystem.isUniqueName(username)) {
+                authToken = registrationSystem.generateAuthToken();
+                id = registrationSystem.generateId();
+
+                // Create a new JFrame to display authToken and id
+                JFrame successFrame = new JFrame("Registration Success");
+                successFrame.setSize(300, 200);
+                successFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                // Create JLabels to display authToken and id
+                JLabel authTokenLabel = new JLabel("AuthToken: " + authToken);
+                JLabel idLabel = new JLabel("ID: " + id);
+
+                // Add JLabels to the JFrame
+                successFrame.getContentPane().setLayout(new FlowLayout());
+                successFrame.getContentPane().add(authTokenLabel);
+                successFrame.getContentPane().add(idLabel);
+
+                // Make the JFrame visible
+                successFrame.setVisible(true);
+
+                User newUser = new User(username, email, password, authToken, id); // authToken and id are set to null for now
+                registrationSystem.register(newUser);
+
+                this.dispose();
+                HubFrame hubFrame = new HubFrame(registrationSystem);
+                hubFrame.setVisible(true);
+                
+                
+                
+            } else if (!registrationSystem.strongPassword(password)) {
+                // Password doesn't meet the strength requirements
+                System.out.println("Password does not meet the strength requirements.");
+            } else if (!registrationSystem.isUniqueName(username)) {
+                // Name is not unique
+                System.out.println("Username is not unique");
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Load users from a file into the registration system
