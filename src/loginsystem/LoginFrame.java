@@ -107,6 +107,7 @@ public class LoginFrame extends javax.swing.JFrame {
         // Login button clicked
         String email = jTextField1.getText();
         String password = new String(jPasswordField1.getPassword());
+        //password = registrationSystem.encryption(password);
         String authToken = "";
 
         // Load users from the file

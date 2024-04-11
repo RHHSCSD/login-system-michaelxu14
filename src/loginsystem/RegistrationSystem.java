@@ -107,7 +107,7 @@ public class RegistrationSystem {
                     users.add(new User(email, username, password, authToken, id));
                 } else {
                     // Print error message if data format is invalid
-                    System.out.println("Invalid data format in line: " + line);
+                    //System.out.println("Invalid data format in line: " + line);
                 }
             }
             // Close scanner
@@ -150,16 +150,19 @@ public class RegistrationSystem {
         // Load existing users
         ArrayList<User> users = loadUsers();
 
+        // Encrypt the provided password
+        String encryptedPassword = this.encryption(password);
+
         // Iterate through the loaded users
         for (User user : users) {
-            // Check if the email, password, and authToken match
-            if (user.getEmail().equals(email) && user.getPassword().equals(password) && user.getAuthToken().equals(authToken)) {
+            // Check if the email, password (after encryption), and authToken match
+            if (user.getEmail().equals(email) && user.getPassword().equals(encryptedPassword) && user.getAuthToken().equals(authToken)) {
                 return true; // Authentication successful
             }
         }
         return false; // Authentication failed
     }
-    
+
     /**
      * Checks if a password is strong.
      * 
@@ -225,7 +228,7 @@ public class RegistrationSystem {
     /**
      * Placeholder method for encryption of passwords. 
      */
-    private String encryption(String password) {
+    public String encryption(String password) {
         try {
             // To be implemented
             // Java helper class to perform encryption

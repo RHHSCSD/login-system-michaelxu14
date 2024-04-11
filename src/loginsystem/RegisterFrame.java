@@ -157,8 +157,10 @@ public class RegisterFrame extends javax.swing.JFrame {
 
                 // Make the JFrame visible
                 successFrame.setVisible(true);
-
-                User newUser = new User(username, email, password, authToken, id); // authToken and id are set to null for now
+                
+                
+                //USER CREATION
+                User newUser = new User(username, email, registrationSystem.encryption(password), authToken, id); // authToken and id are set to null for now
                 registrationSystem.register(newUser);
 
                 this.dispose();
